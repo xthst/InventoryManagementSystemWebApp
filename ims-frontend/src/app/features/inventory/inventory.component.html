@@ -1,0 +1,60 @@
+<app-table-shell [dataSource]="dataSource" [isLoading]="isLoading()">
+  <ng-container filters>
+    <mat-form-field class="filter-fields flex-1">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" 
+        [value]="searchQuery()"
+        (input)="searchQuery.set($any($event.target).value)"
+        (keyup)="filterTable()"
+      >
+    </mat-form-field>
+
+    <mat-form-field class="filter-fields flex-1">
+      <mat-label>Filter by Stock Status</mat-label>
+      <mat-select
+        [value]="selectedStatus()"
+        (selectionChange)="selectedStatus.set($event.value); filterTable()"
+      >
+        @for (status of stockStatus; track status) {
+          <mat-option [value]="status">{{status}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+
+  <ng-container table-slot>
+    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> No. </th>
+        <td mat-cell *matCellDef="let product"> {{ product.id }} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Name </th>
+        <td mat-cell *matCellDef="let product"> {{ product.name }} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let product">{{ product.description }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="quantityOnHand">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="quantityOnHand"> Quantity </th>
+        <td mat-cell *matCellDef="let product"> 
+          {{product.quantityOnHand + ' ' + product.unitOfMeasure}}
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"
+          [style.background-color] = "getRowReorderColor(row)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="columnsToDisplay.length">
+            Nothing found.
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+</app-table-shell>

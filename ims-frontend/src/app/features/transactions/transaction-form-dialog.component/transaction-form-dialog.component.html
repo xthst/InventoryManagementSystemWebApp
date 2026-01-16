@@ -1,0 +1,84 @@
+<app-form-dialog [dialogTitle]="dialogTitle()" [confirmFunction]="save">
+    <ng-container formContent>
+        <form class="flex flex-col gap-4" [formGroup]="form">
+            <mat-form-field>
+                <mat-label>Product</mat-label>
+                <input matInput type="text" formControlName="product" [matAutocomplete]="auto"
+                    (input)="updateSearch($event)" (focus)="updateSearch($event)" />
+                <mat-autocomplete requireSelection #auto="matAutocomplete" [displayWith]="productDisplayFn">
+                    @for (product of filteredProducts(); track product) {
+                    <mat-option [value]="product">
+                        <span>{{product.name}}</span>
+                        |
+                        <small>No. {{product.id}}</small>
+                    </mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="transactionDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="flex gap-2">
+                <mat-form-field class="flex-1">
+                    <mat-label>Hour</mat-label>
+                    <mat-select formControlName="timeHour">
+                        @for (h of hours; track h) {
+                        <mat-option [value]="h">{{h}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="flex-1">
+                    <mat-label>Minute</mat-label>
+                    <input matInput type="number" formControlName="timeMinute" min="0" max="59">
+                    @if (timeMinute.hasError('min') || timeMinute.hasError('max')) {
+                    <mat-error>0-59</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field class="w-24">
+                    <mat-label>AM/PM</mat-label>
+                    <mat-select formControlName="timePeriod">
+                        @for (p of periods; track p) {
+                        <mat-option [value]="p">{{p}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <label>Type</label>
+                <mat-radio-group formControlName="transactionType">
+                    @for (transactionType of transactionTypes(); track transactionType) {
+                    <mat-radio-button [value]="transactionType">{{transactionType}}</mat-radio-button>
+                    }
+                </mat-radio-group>
+            </div>
+            <mat-form-field>
+                <mat-label>Quantity</mat-label>
+                <input matInput type="number" formControlName="quantity" />
+                <mat-hint>Current Stock: <strong>{{currentStock()}}</strong> </mat-hint>
+                @if (quantity.hasError('min')) {
+                <mat-error>Quantity should be at least <strong>1</strong>.</mat-error>
+                }
+                @if (quantity.hasError('max') && selectedTransactionType() === TransactionType.Outbound) {
+                <mat-error>Quantity cannot exceed Current Stock.
+                    Current Stock: <strong>{{currentStock()}}</strong></mat-error>
+                }
+                @if (quantity.hasError('max') && selectedTransactionType() !== TransactionType.Outbound) {
+                <mat-error>Quantity is too large</mat-error>
+                }
+                @if (quantity.hasError('required')) {
+                <mat-error>Quantity is <strong>required</strong></mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Reference</mat-label>
+                <textarea matInput type="number" formControlName="reference"></textarea>
+            </mat-form-field>
+        </form>
+    </ng-container>
+</app-form-dialog>

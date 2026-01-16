@@ -1,0 +1,29 @@
+<app-form-dialog 
+    [dialogTitle]="dialogTitle()"
+    [confirmFunction] = "save"
+>
+    <ng-container formContent>
+        <form class="flex flex-col gap-4" [formGroup]="form">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput type="text" formControlName="name"/>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput type="text" formControlName="description"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Unit Of Measure</mat-label>
+                <input matInput type="text" formControlName="unitOfMeasure"/>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Reorder Point</mat-label>
+                <input matInput type="number" formControlName="reorderPoint"/>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Quantity</mat-label>
+                <input matInput type="number" formControlName="quantityOnHand"/>
+            </mat-form-field>
+        </form>
+    </ng-container>
+</app-form-dialog>

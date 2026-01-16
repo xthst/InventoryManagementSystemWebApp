@@ -1,0 +1,29 @@
+.searchBox {
+  margin-bottom: -1.25em !important;
+}
+
+.table-container {
+    /* full width of parent */
+    width: 100%;
+  
+    /* max height relative to viewport; adjust as needed */
+    max-height: 60vh;
+  
+    /* vertical scroll when content exceeds max-height */
+    overflow-y: auto;
+  
+    /* horizontal scroll if columns overflow */
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  /* optional: sticky header while scrolling */
+  .mat-mdc-header-row {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: inherit; /* or a solid color */
+}
