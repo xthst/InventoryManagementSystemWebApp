@@ -24,7 +24,7 @@ This project is built using the latest web technologies to ensure performance an
 *   **TypeScript** - Strictly typed JavaScript.
 
 **Backend (Integration):**
-*   **Spring Boot** (Java) - *[Assumed based on project context]*
+*   **Spring Boot** (Java)
 
 ## ⚙️ Getting Started
 
@@ -72,10 +72,6 @@ To execute unit tests:
 ```bash
 ng test
 ```
-
-## 📸 Screenshots
-
-*(Add screenshots of your Dashboard, Product List, and Transaction Forms here to showcase the UI)*
 
 ## 🤝 Contributing
 
