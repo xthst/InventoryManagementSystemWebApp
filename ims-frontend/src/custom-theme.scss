@@ -6,13 +6,18 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+:root {
+  --sys-warning-container: light-dark(#ffe082, #4d3300);
+  --sys-on-warning-container: light-dark(#4d2600, #ffcc66);
+}
+
 html {
   @include mat.theme((
     color: (
       primary: mat.$azure-palette,
       tertiary: mat.$blue-palette,
     ),
-    typography: Roboto,
+    typography: Google Sans,
     density: 0,
   ));
 }

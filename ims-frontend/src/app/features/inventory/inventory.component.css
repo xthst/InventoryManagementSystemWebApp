@@ -1,3 +1,21 @@
 .filter-fields {
     margin-bottom: -1.25em !important;
   }
+
+.row-warning {
+  background-color: var(--sys-warning-container);
+  color: var(--sys-on-warning-container);
+
+  td.mat-mdc-cell {
+    color: inherit;
+  }
+}
+
+.row-error {
+  background-color: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+
+  td.mat-mdc-cell {
+    color: inherit;
+  }
+}

@@ -48,7 +48,9 @@
     
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"
-          [style.background-color] = "getRowReorderColor(row)"></tr>
+          [class.row-warning]="row.quantityOnHand > 0 && row.quantityOnHand <= row.reorderPoint"
+          [class.row-error]="row.quantityOnHand == 0">
+      </tr>
 
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" [attr.colspan]="columnsToDisplay.length">

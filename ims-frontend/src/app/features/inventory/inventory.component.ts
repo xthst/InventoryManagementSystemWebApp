@@ -61,9 +61,9 @@ export class InventoryComponent {
 
   getRowReorderColor(product: Product): string {
     if (product.quantityOnHand == 0) {
-      return '	#ffc2c2';
+      return 'error';
     } else if (product.quantityOnHand <= product.reorderPoint) {
-      return '#FFFAA0';
+      return 'warn';
     }
 
     return '';

@@ -7,19 +7,20 @@ import { ProductService } from '../../services/product.service';
 import { TransactionService } from '../../services/transaction.service';
 import { Product } from '../../model/product.model';
 import { catchError } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Transaction } from '../../model/transaction.type';
-import { T } from '@angular/cdk/keycodes';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [InventoryComponent, TransactionsComponent, ProductsComponent, MatTabsModule],
+  imports: [InventoryComponent, TransactionsComponent, ProductsComponent, MatTabsModule, MatSidenavModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly transactionService = inject(TransactionService);
+
+  opened = signal<boolean>(false);
 
   productData = signal<Product[]>([]);
   transactionData = signal<Transaction[]>([]);
