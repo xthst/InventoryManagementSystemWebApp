@@ -1,5 +1,9 @@
 <header>
     <mat-toolbar>
         <span>Inventory Management System</span>
+        <span class="spacer"></span>
+        <button matIconButton (click)="themeService.toggleTheme()" aria-label="Toggle theme">
+            <mat-icon>{{ themeService.isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
     </mat-toolbar>
 </header>

@@ -1,4 +1,8 @@
 mat-toolbar {
-  background-color: var(--mat-sys-surface-container-low);
-  color: var(--mat-sys-on-surface-container);
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
